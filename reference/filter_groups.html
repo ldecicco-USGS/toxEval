@@ -167,7 +167,7 @@ reconsidered based on individual study objectives." />
 
     <div class="ref-description">
     <p>This function provides a mechanism to specify 3 levels of information in the 
-supplied data frame <code><a href='end_point_info.html'>end_point_info</a></code> to be used in subsequent analysis steps. 
+supplied data frame <code><a href='https://rdrr.io/pkg/toxEval/man/end_point_info.html'>end_point_info</a></code> to be used in subsequent analysis steps. 
 First, the user specifies the ToxCast assay annotation using the 'groupCol' 
 argument, which is a column header in 'end_point_info'. Second, the user 
 specifies the families of assays to use. Finally, the user can choose to 
@@ -176,12 +176,12 @@ remove specific group(s) from the category. The default is to remove
 reconsidered based on individual study objectives.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>filter_groups</span>(
-  <span class='no'>ep</span>,
-  <span class='kw'>groupCol</span> <span class='kw'>=</span> <span class='st'>"intended_target_family"</span>,
-  <span class='kw'>assays</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"ACEA"</span>, <span class='st'>"APR"</span>, <span class='st'>"ATG"</span>, <span class='st'>"NVS"</span>, <span class='st'>"OT"</span>, <span class='st'>"TOX21"</span>, <span class='st'>"CEETOX"</span>, <span class='st'>"CLD"</span>, <span class='st'>"TANGUAY"</span>,
+    <pre class="usage"><span class='fu'><a href='https://rdrr.io/pkg/toxEval/man/filter_groups.html'>filter_groups</a></span>(
+  <span class='kw'>ep</span>,
+  groupCol = <span class='st'>"intended_target_family"</span>,
+  assays = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"ACEA"</span>, <span class='st'>"APR"</span>, <span class='st'>"ATG"</span>, <span class='st'>"NVS"</span>, <span class='st'>"OT"</span>, <span class='st'>"TOX21"</span>, <span class='st'>"CEETOX"</span>, <span class='st'>"CLD"</span>, <span class='st'>"TANGUAY"</span>,
     <span class='st'>"NHEERL_PADILLA"</span>, <span class='st'>"NCCT"</span>, <span class='st'>"NHEERL_HUNTER"</span>, <span class='st'>"NHEERL_NIS"</span>, <span class='st'>"NHEERL_MED"</span>, <span class='st'>"UPITT"</span>),
-  <span class='kw'>remove_groups</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Background Measurement"</span>, <span class='st'>"Undefined"</span>)
+  remove_groups = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Background Measurement"</span>, <span class='st'>"Undefined"</span>)
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -218,10 +218,10 @@ Following that link, it defines "intended_target_family" as "the target family o
 objective target for the assay". Much more detail can be discovered in that documentation.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>end_point_info</span> <span class='kw'>&lt;-</span> <span class='no'>end_point_info</span>
-<span class='no'>cleaned_ep</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='clean_endPoint_info.html'>clean_endPoint_info</a></span>(<span class='no'>end_point_info</span>)
-<span class='no'>filtered_ep</span> <span class='kw'>&lt;-</span> <span class='fu'>filter_groups</span>(<span class='no'>cleaned_ep</span>)
-<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='no'>filtered_ep</span>)</div><div class='output co'>#&gt;                          endPoint         groupCol assaysFull
+    <pre class="examples"><div class='input'><span class='kw'>end_point_info</span> <span class='op'>&lt;-</span> <span class='kw'>end_point_info</span>
+<span class='kw'>cleaned_ep</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/toxEval/man/clean_endPoint_info.html'>clean_endPoint_info</a></span>(<span class='kw'>end_point_info</span>)
+<span class='kw'>filtered_ep</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/toxEval/man/filter_groups.html'>filter_groups</a></span>(<span class='kw'>cleaned_ep</span>)
+<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='kw'>filtered_ep</span>)</div><div class='output co'>#&gt;                          endPoint         groupCol assaysFull
 #&gt; 1                    ACEA_ER_80hr Nuclear Receptor       ACEA
 #&gt; 2           ACEA_ER_AUC_viability       Cell Cycle       ACEA
 #&gt; 3 APR_HepG2_CellCycleArrest_1h_dn       Cell Cycle        APR

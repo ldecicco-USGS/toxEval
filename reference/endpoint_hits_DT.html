@@ -176,21 +176,21 @@ chemical information available in the "Comptox Dashboard"
 <a href='https://comptox.epa.gov/dashboard/'>https://comptox.epa.gov/dashboard/</a>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>endpoint_hits_DT</span>(
-  <span class='no'>chemical_summary</span>,
-  <span class='kw'>category</span> <span class='kw'>=</span> <span class='st'>"Biological"</span>,
-  <span class='kw'>mean_logic</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>sum_logic</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>hit_threshold</span> <span class='kw'>=</span> <span class='fl'>0.1</span>,
-  <span class='kw'>include_links</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
+    <pre class="usage"><span class='fu'><a href='https://rdrr.io/pkg/toxEval/man/endpoint_hits_DT.html'>endpoint_hits_DT</a></span>(
+  <span class='kw'>chemical_summary</span>,
+  category = <span class='st'>"Biological"</span>,
+  mean_logic = <span class='fl'>FALSE</span>,
+  sum_logic = <span class='fl'>TRUE</span>,
+  hit_threshold = <span class='fl'>0.1</span>,
+  include_links = <span class='fl'>TRUE</span>
 )
 
-<span class='fu'>endpoint_hits</span>(
-  <span class='no'>chemical_summary</span>,
-  <span class='kw'>category</span> <span class='kw'>=</span> <span class='st'>"Biological"</span>,
-  <span class='kw'>mean_logic</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>sum_logic</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>hit_threshold</span> <span class='kw'>=</span> <span class='fl'>0.1</span>
+<span class='fu'><a href='https://rdrr.io/pkg/toxEval/man/endpoint_hits_DT.html'>endpoint_hits</a></span>(
+  <span class='kw'>chemical_summary</span>,
+  category = <span class='st'>"Biological"</span>,
+  mean_logic = <span class='fl'>FALSE</span>,
+  sum_logic = <span class='fl'>TRUE</span>,
+  hit_threshold = <span class='fl'>0.1</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -240,24 +240,24 @@ with hits.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># This is the example workflow:</span>
-<span class='no'>path_to_tox</span> <span class='kw'>&lt;-</span>  <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"extdata"</span>, <span class='kw'>package</span><span class='kw'>=</span><span class='st'>"toxEval"</span>)
-<span class='no'>file_name</span> <span class='kw'>&lt;-</span> <span class='st'>"OWC_data_fromSup.xlsx"</span>
+<span class='kw'>path_to_tox</span> <span class='op'>&lt;-</span>  <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"extdata"</span>, package=<span class='st'>"toxEval"</span>)
+<span class='kw'>file_name</span> <span class='op'>&lt;-</span> <span class='st'>"OWC_data_fromSup.xlsx"</span>
 
-<span class='no'>full_path</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span>(<span class='no'>path_to_tox</span>, <span class='no'>file_name</span>)
+<span class='kw'>full_path</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span>(<span class='kw'>path_to_tox</span>, <span class='kw'>file_name</span>)
 <span class='co'># \donttest{</span>
-<span class='no'>tox_list</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='create_toxEval.html'>create_toxEval</a></span>(<span class='no'>full_path</span>)
+<span class='kw'>tox_list</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/toxEval/man/create_toxEval.html'>create_toxEval</a></span>(<span class='kw'>full_path</span>)
 
-<span class='no'>ACC</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='get_ACC.html'>get_ACC</a></span>(<span class='no'>tox_list</span>$<span class='no'>chem_info</span>$<span class='no'>CAS</span>)
-<span class='no'>ACC</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='remove_flags.html'>remove_flags</a></span>(<span class='no'>ACC</span>)
+<span class='kw'>ACC</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/toxEval/man/get_ACC.html'>get_ACC</a></span>(<span class='kw'>tox_list</span><span class='op'>$</span><span class='kw'>chem_info</span><span class='op'>$</span><span class='kw'>CAS</span>)
+<span class='kw'>ACC</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/toxEval/man/remove_flags.html'>remove_flags</a></span>(<span class='kw'>ACC</span>)
 
-<span class='no'>cleaned_ep</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='clean_endPoint_info.html'>clean_endPoint_info</a></span>(<span class='no'>end_point_info</span>)
-<span class='no'>filtered_ep</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='filter_groups.html'>filter_groups</a></span>(<span class='no'>cleaned_ep</span>)
-<span class='no'>chemical_summary</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='get_chemical_summary.html'>get_chemical_summary</a></span>(<span class='no'>tox_list</span>, <span class='no'>ACC</span>, <span class='no'>filtered_ep</span>)
+<span class='kw'>cleaned_ep</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/toxEval/man/clean_endPoint_info.html'>clean_endPoint_info</a></span>(<span class='kw'>end_point_info</span>)
+<span class='kw'>filtered_ep</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/toxEval/man/filter_groups.html'>filter_groups</a></span>(<span class='kw'>cleaned_ep</span>)
+<span class='kw'>chemical_summary</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/toxEval/man/get_chemical_summary.html'>get_chemical_summary</a></span>(<span class='kw'>tox_list</span>, <span class='kw'>ACC</span>, <span class='kw'>filtered_ep</span>)
 
-<span class='no'>hits_df</span> <span class='kw'>&lt;-</span> <span class='fu'>endpoint_hits</span>(<span class='no'>chemical_summary</span>, <span class='kw'>category</span> <span class='kw'>=</span> <span class='st'>"Biological"</span>)
-<span class='fu'>endpoint_hits_DT</span>(<span class='no'>chemical_summary</span>, <span class='kw'>category</span> <span class='kw'>=</span> <span class='st'>"Biological"</span>)
-<span class='fu'>endpoint_hits_DT</span>(<span class='no'>chemical_summary</span>, <span class='kw'>category</span> <span class='kw'>=</span> <span class='st'>"Chemical Class"</span>)
-<span class='fu'>endpoint_hits_DT</span>(<span class='no'>chemical_summary</span>, <span class='kw'>category</span> <span class='kw'>=</span> <span class='st'>"Chemical"</span>)
+<span class='kw'>hits_df</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/toxEval/man/endpoint_hits_DT.html'>endpoint_hits</a></span>(<span class='kw'>chemical_summary</span>, category = <span class='st'>"Biological"</span>)                        
+<span class='fu'><a href='https://rdrr.io/pkg/toxEval/man/endpoint_hits_DT.html'>endpoint_hits_DT</a></span>(<span class='kw'>chemical_summary</span>, category = <span class='st'>"Biological"</span>)
+<span class='fu'><a href='https://rdrr.io/pkg/toxEval/man/endpoint_hits_DT.html'>endpoint_hits_DT</a></span>(<span class='kw'>chemical_summary</span>, category = <span class='st'>"Chemical Class"</span>)
+<span class='fu'><a href='https://rdrr.io/pkg/toxEval/man/endpoint_hits_DT.html'>endpoint_hits_DT</a></span>(<span class='kw'>chemical_summary</span>, category = <span class='st'>"Chemical"</span>)
 <span class='co'># }</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

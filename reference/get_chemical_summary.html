@@ -164,20 +164,20 @@ benchmark data can be provided to perform the same &quot;toxEval&quot; analysis.
 
     <div class="ref-description">
     <p>This function computes Exposure:Activity ratios using user-provided measured 
-concentration data from the output of <code><a href='create_toxEval.html'>create_toxEval</a></code>,
+concentration data from the output of <code><a href='https://rdrr.io/pkg/toxEval/man/create_toxEval.html'>create_toxEval</a></code>,
 and joins the data with the activity concentration at cutoff data provided by 
 ToxCast.Data from ToxCast is included with this package, but alternative 
 benchmark data can be provided to perform the same "toxEval" analysis.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>get_chemical_summary</span>(
-  <span class='no'>tox_list</span>,
-  <span class='kw'>ACC</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>filtered_ep</span> <span class='kw'>=</span> <span class='st'>"All"</span>,
-  <span class='kw'>chem_data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>chem_site</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>chem_info</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>exclusion</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
+    <pre class="usage"><span class='fu'><a href='https://rdrr.io/pkg/toxEval/man/get_chemical_summary.html'>get_chemical_summary</a></span>(
+  <span class='kw'>tox_list</span>,
+  ACC = <span class='kw'>NULL</span>,
+  filtered_ep = <span class='st'>"All"</span>,
+  chem_data = <span class='kw'>NULL</span>,
+  chem_site = <span class='kw'>NULL</span>,
+  chem_info = <span class='kw'>NULL</span>,
+  exclusion = <span class='kw'>NULL</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -186,14 +186,14 @@ benchmark data can be provided to perform the same "toxEval" analysis.</p>
     <tr>
       <th>tox_list</th>
       <td><p>List with data frames for chem_data, chem_info, chem_site, 
-and optionally exclusions and benchmarks. Created with <code><a href='create_toxEval.html'>create_toxEval</a></code>.</p></td>
+and optionally exclusions and benchmarks. Created with <code><a href='https://rdrr.io/pkg/toxEval/man/create_toxEval.html'>create_toxEval</a></code>.</p></td>
     </tr>
     <tr>
       <th>ACC</th>
       <td><p>Data frame with columns: CAS, chnm, endPoint, and ACC_value 
 for specific chemical/endpoint combinations generated using the 
-<code><a href='get_ACC.html'>get_ACC</a></code> function. EndPoints with specific data quality flags 
-may optionally be removed using the <code><a href='remove_flags.html'>remove_flags</a></code> function.</p></td>
+<code><a href='https://rdrr.io/pkg/toxEval/man/get_ACC.html'>get_ACC</a></code> function. EndPoints with specific data quality flags 
+may optionally be removed using the <code><a href='https://rdrr.io/pkg/toxEval/man/remove_flags.html'>remove_flags</a></code> function.</p></td>
     </tr>
     <tr>
       <th>filtered_ep</th>
@@ -236,33 +236,33 @@ based on data quality "flags" in the ToxCast database, and removing groups of
 endPoints that may not be important to the analysis at hand.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>path_to_tox</span> <span class='kw'>&lt;-</span>  <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"extdata"</span>, <span class='kw'>package</span><span class='kw'>=</span><span class='st'>"toxEval"</span>)
-<span class='no'>file_name</span> <span class='kw'>&lt;-</span> <span class='st'>"OWC_data_fromSup.xlsx"</span>
-<span class='no'>full_path</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span>(<span class='no'>path_to_tox</span>, <span class='no'>file_name</span>)
+    <pre class="examples"><div class='input'><span class='kw'>path_to_tox</span> <span class='op'>&lt;-</span>  <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"extdata"</span>, package=<span class='st'>"toxEval"</span>)
+<span class='kw'>file_name</span> <span class='op'>&lt;-</span> <span class='st'>"OWC_data_fromSup.xlsx"</span>
+<span class='kw'>full_path</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span>(<span class='kw'>path_to_tox</span>, <span class='kw'>file_name</span>)
 
-<span class='no'>tox_list</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='create_toxEval.html'>create_toxEval</a></span>(<span class='no'>full_path</span>)
+<span class='kw'>tox_list</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/toxEval/man/create_toxEval.html'>create_toxEval</a></span>(<span class='kw'>full_path</span>)
 
-<span class='no'>ACC</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='get_ACC.html'>get_ACC</a></span>(<span class='no'>tox_list</span>$<span class='no'>chem_info</span>$<span class='no'>CAS</span>)
-<span class='no'>ACC</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='remove_flags.html'>remove_flags</a></span>(<span class='no'>ACC</span>)
+<span class='kw'>ACC</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/toxEval/man/get_ACC.html'>get_ACC</a></span>(<span class='kw'>tox_list</span><span class='op'>$</span><span class='kw'>chem_info</span><span class='op'>$</span><span class='kw'>CAS</span>)
+<span class='kw'>ACC</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/toxEval/man/remove_flags.html'>remove_flags</a></span>(<span class='kw'>ACC</span>)
 
-<span class='no'>cleaned_ep</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='clean_endPoint_info.html'>clean_endPoint_info</a></span>(<span class='no'>end_point_info</span>)
-<span class='no'>filtered_ep</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='filter_groups.html'>filter_groups</a></span>(<span class='no'>cleaned_ep</span>)
+<span class='kw'>cleaned_ep</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/toxEval/man/clean_endPoint_info.html'>clean_endPoint_info</a></span>(<span class='kw'>end_point_info</span>)
+<span class='kw'>filtered_ep</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/toxEval/man/filter_groups.html'>filter_groups</a></span>(<span class='kw'>cleaned_ep</span>)
 
-<span class='no'>chemical_summary</span> <span class='kw'>&lt;-</span> <span class='fu'>get_chemical_summary</span>(<span class='no'>tox_list</span>, <span class='no'>ACC</span>, <span class='no'>filtered_ep</span>)
-<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='no'>chemical_summary</span>)</div><div class='output co'>#&gt;       CAS          chnm                  endPoint          site
-#&gt; 1 84-65-1 Anthraquinone TOX21_ERa_LUC_VM7_Agonist USGS-04024000
-#&gt; 2 84-65-1 Anthraquinone TOX21_ERa_LUC_VM7_Agonist USGS-04024000
-#&gt; 3 84-65-1 Anthraquinone TOX21_ERa_LUC_VM7_Agonist USGS-04067500
-#&gt; 4 84-65-1 Anthraquinone TOX21_ERa_LUC_VM7_Agonist USGS-04067500
-#&gt; 5 84-65-1 Anthraquinone TOX21_ERa_LUC_VM7_Agonist USGS-04067500
-#&gt; 6 84-65-1 Anthraquinone TOX21_ERa_LUC_VM7_Agonist USGS-04067500
+<span class='kw'>chemical_summary</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/toxEval/man/get_chemical_summary.html'>get_chemical_summary</a></span>(<span class='kw'>tox_list</span>, <span class='kw'>ACC</span>, <span class='kw'>filtered_ep</span>)
+<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='kw'>chemical_summary</span>)                             </div><div class='output co'>#&gt;        CAS              chnm             endPoint          site
+#&gt; 1 119-36-8 Methyl salicylate ACEA_AR_agonist_80hr USGS-04024000
+#&gt; 2 119-36-8 Methyl salicylate ACEA_AR_agonist_80hr USGS-04095090
+#&gt; 3 119-36-8 Methyl salicylate ACEA_AR_agonist_80hr USGS-04137500
+#&gt; 4 119-36-8 Methyl salicylate ACEA_AR_agonist_80hr USGS-04137500
+#&gt; 5 119-36-8 Methyl salicylate ACEA_AR_agonist_80hr USGS-04137500
+#&gt; 6 119-36-8 Methyl salicylate ACEA_AR_agonist_80hr USGS-04137500
 #&gt;                  date          EAR     Bio_category shortName         Class
-#&gt; 1 2011-05-01 13:00:00 1.804762e-05 Nuclear Receptor   StLouis Dyes/Pigments
-#&gt; 2 2013-04-27 10:40:00 9.023810e-06 Nuclear Receptor   StLouis Dyes/Pigments
-#&gt; 3 2011-03-21 15:36:00 1.503968e-05 Nuclear Receptor Menominee Dyes/Pigments
-#&gt; 4 2011-04-26 12:15:00 9.023810e-06 Nuclear Receptor Menominee Dyes/Pigments
-#&gt; 5 2011-04-28 13:48:00 6.015873e-06 Nuclear Receptor Menominee Dyes/Pigments
-#&gt; 6 2011-06-21 09:56:00 9.023810e-06 Nuclear Receptor Menominee Dyes/Pigments</div></pre>
+#&gt; 1 2011-05-01 13:00:00 2.223795e-05 Nuclear Receptor   StLouis Miscellaneous
+#&gt; 2 2011-10-20 13:45:00 1.779036e-05 Nuclear Receptor     Burns Miscellaneous
+#&gt; 3 2011-11-10 14:00:00 2.668554e-05 Nuclear Receptor   AuSable Miscellaneous
+#&gt; 4 2011-12-13 15:00:00 4.002831e-05 Nuclear Receptor   AuSable Miscellaneous
+#&gt; 5 2012-01-10 11:00:00 2.668554e-05 Nuclear Receptor   AuSable Miscellaneous
+#&gt; 6 2012-02-21 13:00:00 5.337108e-05 Nuclear Receptor   AuSable Miscellaneous</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

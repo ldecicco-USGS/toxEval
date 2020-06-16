@@ -167,15 +167,15 @@ that the output of get_chemical_summary." />
 of using any benchmarks, the EAR column is simply
 the concentration. The output of this function can be used
 in any of the plotting or table functions in the same way 
-that the output of <code><a href='get_chemical_summary.html'>get_chemical_summary</a></code>.</p>
+that the output of <code><a href='https://rdrr.io/pkg/toxEval/man/get_chemical_summary.html'>get_chemical_summary</a></code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>get_concentration_summary</span>(
-  <span class='no'>tox_list</span>,
-  <span class='kw'>chem_data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>chem_site</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>chem_info</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>tox_names</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
+    <pre class="usage"><span class='fu'><a href='https://rdrr.io/pkg/toxEval/man/get_concentration_summary.html'>get_concentration_summary</a></span>(
+  <span class='kw'>tox_list</span>,
+  chem_data = <span class='kw'>NULL</span>,
+  chem_site = <span class='kw'>NULL</span>,
+  chem_info = <span class='kw'>NULL</span>,
+  tox_names = <span class='fl'>TRUE</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -184,7 +184,7 @@ that the output of <code><a href='get_chemical_summary.html'>get_chemical_summar
     <tr>
       <th>tox_list</th>
       <td><p>List with data frames for chem_data, chem_info, and chem_site.
-Created with <code><a href='create_toxEval.html'>create_toxEval</a></code>.</p></td>
+Created with <code><a href='https://rdrr.io/pkg/toxEval/man/create_toxEval.html'>create_toxEval</a></code>.</p></td>
     </tr>
     <tr>
       <th>chem_data</th>
@@ -216,14 +216,14 @@ as a factor), site, date, EAR (which is just concentration), Bio_category, short
 function is where you find EAR values for every chemical/endpoint combination.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>path_to_tox</span> <span class='kw'>&lt;-</span>  <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"extdata"</span>, <span class='kw'>package</span><span class='kw'>=</span><span class='st'>"toxEval"</span>)
-<span class='no'>file_name</span> <span class='kw'>&lt;-</span> <span class='st'>"OWC_data_fromSup.xlsx"</span>
-<span class='no'>full_path</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span>(<span class='no'>path_to_tox</span>, <span class='no'>file_name</span>)
+    <pre class="examples"><div class='input'><span class='kw'>path_to_tox</span> <span class='op'>&lt;-</span>  <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"extdata"</span>, package=<span class='st'>"toxEval"</span>)
+<span class='kw'>file_name</span> <span class='op'>&lt;-</span> <span class='st'>"OWC_data_fromSup.xlsx"</span>
+<span class='kw'>full_path</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span>(<span class='kw'>path_to_tox</span>, <span class='kw'>file_name</span>)
 
-<span class='no'>tox_list</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='create_toxEval.html'>create_toxEval</a></span>(<span class='no'>full_path</span>)
+<span class='kw'>tox_list</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/toxEval/man/create_toxEval.html'>create_toxEval</a></span>(<span class='kw'>full_path</span>)
 
-<span class='no'>chemical_summary_conc</span> <span class='kw'>&lt;-</span> <span class='fu'>get_concentration_summary</span>(<span class='no'>tox_list</span>)
-<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='no'>chemical_summary_conc</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 6 x 9</span><span>
+<span class='kw'>chemical_summary_conc</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/toxEval/man/get_concentration_summary.html'>get_concentration_summary</a></span>(<span class='kw'>tox_list</span>)
+<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='kw'>chemical_summary_conc</span>)  </div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 6 x 9</span><span>
 #&gt;   CAS   site    EAR date                Bio_category endPoint shortName Class
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span>              </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>
 #&gt; </span><span style='color: #555555;'>1</span><span> 2114… USGS…  0    2012-07-12 </span><span style='color: #555555;'>11:00:00</span><span> Concentrati… Concent… Oswego    Flav…
@@ -232,9 +232,9 @@ function is where you find EAR values for every chemical/endpoint combination.</
 #&gt; </span><span style='color: #555555;'>4</span><span> 5783… USGS…  0.09 2011-06-28 </span><span style='color: #555555;'>14:15:00</span><span> Concentrati… Concent… Maumee    Herb…
 #&gt; </span><span style='color: #555555;'>5</span><span> 5783… USGS…  0.17 2012-05-07 </span><span style='color: #555555;'>09:23:00</span><span> Concentrati… Concent… Maumee    Herb…
 #&gt; </span><span style='color: #555555;'>6</span><span> 5783… USGS…  0.12 2012-05-22 </span><span style='color: #555555;'>15:30:00</span><span> Concentrati… Concent… Maumee    Herb…
-#&gt; </span><span style='color: #555555;'># … with 1 more variable: chnm </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span></div><div class='input'><span class='fu'><a href='plot_tox_boxplots.html'>plot_tox_boxplots</a></span>(<span class='no'>chemical_summary_conc</span>,
-                  <span class='kw'>category</span> <span class='kw'>=</span> <span class='st'>"Chemical"</span>,
-                  <span class='kw'>x_label</span> <span class='kw'>=</span> <span class='st'>"Concentration [ug/L]"</span>)</div><div class='img'><img src='get_concentration_summary-1.png' alt='' width='700' height='433' /></div></span></pre>
+#&gt; </span><span style='color: #555555;'># … with 1 more variable: chnm </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span></div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/toxEval/man/plot_tox_boxplots.html'>plot_tox_boxplots</a></span>(<span class='kw'>chemical_summary_conc</span>, 
+                  category = <span class='st'>"Chemical"</span>,
+                  x_label = <span class='st'>"Concentration [ug/L]"</span>)                        </div><div class='img'><img src='get_concentration_summary-1.png' alt='' width='700' height='433' /></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

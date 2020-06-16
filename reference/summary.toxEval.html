@@ -171,7 +171,7 @@ and returns a vector of which chemicals do not have ToxCast information.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for toxEval</span>
-<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>object</span>, <span class='no'>...</span>)</pre>
+<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='kw'>object</span>, <span class='kw'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -188,11 +188,11 @@ and returns a vector of which chemicals do not have ToxCast information.</p>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>path_to_tox</span> <span class='kw'>&lt;-</span>  <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"extdata"</span>, <span class='kw'>package</span><span class='kw'>=</span><span class='st'>"toxEval"</span>)
-<span class='no'>file_name</span> <span class='kw'>&lt;-</span> <span class='st'>"OWC_data_fromSup.xlsx"</span>
-<span class='no'>excel_file_path</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span>(<span class='no'>path_to_tox</span>, <span class='no'>file_name</span>)
-<span class='no'>tox_list</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='create_toxEval.html'>create_toxEval</a></span>(<span class='no'>excel_file_path</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>tox_list</span>)</div><div class='output co'>#&gt; <span class='message'>60 chemicals have ToxCast information</span></div><div class='output co'>#&gt; <span class='message'>Chemicals returned from this function do NOT have ToxCast information:</span></div><div class='output co'>#&gt; [1] "91-57-6"    "2315-67-5"  "20427-84-3" "104-35-8"   "2315-61-9" 
+    <pre class="examples"><div class='input'><span class='kw'>path_to_tox</span> <span class='op'>&lt;-</span>  <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"extdata"</span>, package=<span class='st'>"toxEval"</span>)
+<span class='kw'>file_name</span> <span class='op'>&lt;-</span> <span class='st'>"OWC_data_fromSup.xlsx"</span>
+<span class='kw'>excel_file_path</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span>(<span class='kw'>path_to_tox</span>, <span class='kw'>file_name</span>)
+<span class='kw'>tox_list</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/toxEval/man/create_toxEval.html'>create_toxEval</a></span>(<span class='kw'>excel_file_path</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='kw'>tox_list</span>) </div><div class='output co'>#&gt; <span class='message'>60 chemicals have ToxCast information</span></div><div class='output co'>#&gt; <span class='message'>Chemicals returned from this function do NOT have ToxCast information:</span></div><div class='output co'>#&gt; [1] "91-57-6"    "2315-67-5"  "20427-84-3" "104-35-8"   "2315-61-9" 
 #&gt; [6] "360-68-9"   "83-46-5"    "19466-47-8" "57-88-5"   </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

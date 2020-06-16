@@ -177,22 +177,22 @@ must be one of the defined "Chemical Class" options such as "Herbicide".
 A boxplot is generated for each endPoint. The EAR values that are used to 
 create the boxplots are the mean or maximum (as defined by mean_logic) for each 
 site as described in "Summarizing the data"in the Introduction vignette: 
-<a href='../doc/Introduction.html#summarize_data'><code><a href='../articles/Introduction.html'>vignette("Introduction", package = "toxEval")</a></code></a>.</p>
+<a href='../doc/Introduction.html#summarize_data'><code>vignette("Introduction", package = "toxEval")</code></a>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>plot_tox_endpoints</span>(
-  <span class='no'>chemical_summary</span>,
-  <span class='kw'>category</span> <span class='kw'>=</span> <span class='st'>"Biological"</span>,
-  <span class='kw'>filterBy</span> <span class='kw'>=</span> <span class='st'>"All"</span>,
-  <span class='kw'>manual_remove</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>hit_threshold</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
-  <span class='kw'>mean_logic</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>sum_logic</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>font_size</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
-  <span class='kw'>title</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
-  <span class='kw'>x_label</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
-  <span class='kw'>palette</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
-  <span class='kw'>top_num</span> <span class='kw'>=</span> <span class='fl'>NA</span>
+    <pre class="usage"><span class='fu'><a href='https://rdrr.io/pkg/toxEval/man/plot_tox_endpoints.html'>plot_tox_endpoints</a></span>(
+  <span class='kw'>chemical_summary</span>,
+  category = <span class='st'>"Biological"</span>,
+  filterBy = <span class='st'>"All"</span>,
+  manual_remove = <span class='kw'>NULL</span>,
+  hit_threshold = <span class='fl'>NA</span>,
+  mean_logic = <span class='fl'>FALSE</span>,
+  sum_logic = <span class='fl'>TRUE</span>,
+  font_size = <span class='fl'>NA</span>,
+  title = <span class='fl'>NA</span>,
+  x_label = <span class='fl'>NA</span>,
+  palette = <span class='fl'>NA</span>,
+  top_num = <span class='fl'>NA</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -200,7 +200,7 @@ site as described in "Summarizing the data"in the Introduction vignette:
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>chemical_summary</th>
-      <td><p>Data frame from <code><a href='get_chemical_summary.html'>get_chemical_summary</a></code>.</p></td>
+      <td><p>Data frame from <code><a href='https://rdrr.io/pkg/toxEval/man/get_chemical_summary.html'>get_chemical_summary</a></code>.</p></td>
     </tr>
     <tr>
       <th>category</th>
@@ -256,33 +256,33 @@ endpoints will be included.</p></td>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>Box plots are standard Tukey representations. See "Box plot details" in the Basic Workflow vignette: 
-<a href='../doc/basicWorkflow.html#box_plot_details'><code><a href='../articles/basicWorkflow.html'>vignette("basicWorkflow", package = "toxEval")</a></code></a>
+<a href='../doc/basicWorkflow.html#box_plot_details'><code>vignette("basicWorkflow", package = "toxEval")</code></a>
 for more information.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># This is the example workflow:</span>
-<span class='no'>path_to_tox</span> <span class='kw'>&lt;-</span>  <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"extdata"</span>, <span class='kw'>package</span><span class='kw'>=</span><span class='st'>"toxEval"</span>)
-<span class='no'>file_name</span> <span class='kw'>&lt;-</span> <span class='st'>"OWC_data_fromSup.xlsx"</span>
+<span class='kw'>path_to_tox</span> <span class='op'>&lt;-</span>  <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"extdata"</span>, package=<span class='st'>"toxEval"</span>)
+<span class='kw'>file_name</span> <span class='op'>&lt;-</span> <span class='st'>"OWC_data_fromSup.xlsx"</span>
 
-<span class='no'>full_path</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span>(<span class='no'>path_to_tox</span>, <span class='no'>file_name</span>)
+<span class='kw'>full_path</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span>(<span class='kw'>path_to_tox</span>, <span class='kw'>file_name</span>)
 
-<span class='no'>tox_list</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='create_toxEval.html'>create_toxEval</a></span>(<span class='no'>full_path</span>)
-<span class='no'>ACC</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='get_ACC.html'>get_ACC</a></span>(<span class='no'>tox_list</span>$<span class='no'>chem_info</span>$<span class='no'>CAS</span>)
-<span class='no'>ACC</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='remove_flags.html'>remove_flags</a></span>(<span class='no'>ACC</span>)
+<span class='kw'>tox_list</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/toxEval/man/create_toxEval.html'>create_toxEval</a></span>(<span class='kw'>full_path</span>)
+<span class='kw'>ACC</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/toxEval/man/get_ACC.html'>get_ACC</a></span>(<span class='kw'>tox_list</span><span class='op'>$</span><span class='kw'>chem_info</span><span class='op'>$</span><span class='kw'>CAS</span>)
+<span class='kw'>ACC</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/toxEval/man/remove_flags.html'>remove_flags</a></span>(<span class='kw'>ACC</span>)
 
-<span class='no'>cleaned_ep</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='clean_endPoint_info.html'>clean_endPoint_info</a></span>(<span class='no'>end_point_info</span>)
-<span class='no'>filtered_ep</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='filter_groups.html'>filter_groups</a></span>(<span class='no'>cleaned_ep</span>)
-<span class='no'>chemical_summary</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='get_chemical_summary.html'>get_chemical_summary</a></span>(<span class='no'>tox_list</span>, <span class='no'>ACC</span>, <span class='no'>filtered_ep</span>)
+<span class='kw'>cleaned_ep</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/toxEval/man/clean_endPoint_info.html'>clean_endPoint_info</a></span>(<span class='kw'>end_point_info</span>)
+<span class='kw'>filtered_ep</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/toxEval/man/filter_groups.html'>filter_groups</a></span>(<span class='kw'>cleaned_ep</span>)
+<span class='kw'>chemical_summary</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/toxEval/man/get_chemical_summary.html'>get_chemical_summary</a></span>(<span class='kw'>tox_list</span>, <span class='kw'>ACC</span>, <span class='kw'>filtered_ep</span>)
 
-<span class='fu'>plot_tox_endpoints</span>(<span class='no'>chemical_summary</span>,
-                   <span class='kw'>filterBy</span> <span class='kw'>=</span> <span class='st'>"Cell Cycle"</span>,
-                   <span class='kw'>top_num</span> <span class='kw'>=</span> <span class='fl'>10</span>)</div><div class='img'><img src='plot_tox_endpoints-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>plot_tox_endpoints</span>(<span class='no'>chemical_summary</span>,
-                   <span class='kw'>filterBy</span> <span class='kw'>=</span> <span class='st'>"Cell Cycle"</span>,
-                   <span class='kw'>top_num</span> <span class='kw'>=</span> <span class='fl'>10</span>,
-                   <span class='kw'>x_label</span> <span class='kw'>=</span> <span class='st'>"EAR"</span>)</div><div class='img'><img src='plot_tox_endpoints-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>plot_tox_endpoints</span>(<span class='no'>chemical_summary</span>,
-                   <span class='kw'>category</span> <span class='kw'>=</span> <span class='st'>"Chemical Class"</span>, <span class='kw'>filterBy</span> <span class='kw'>=</span> <span class='st'>"PAHs"</span>,
-                   <span class='kw'>top_num</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>hit_threshold</span> <span class='kw'>=</span> <span class='fl'>0.001</span>)</div><div class='img'><img src='plot_tox_endpoints-3.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>plot_tox_endpoints</span>(<span class='no'>chemical_summary</span>, <span class='kw'>category</span> <span class='kw'>=</span> <span class='st'>"Chemical"</span>, <span class='kw'>filterBy</span> <span class='kw'>=</span> <span class='st'>"Atrazine"</span>)</div><div class='img'><img src='plot_tox_endpoints-4.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>plot_tox_endpoints</span>(<span class='no'>chemical_summary</span>, <span class='kw'>category</span> <span class='kw'>=</span> <span class='st'>"Chemical"</span>, <span class='kw'>top_num</span> <span class='kw'>=</span> <span class='fl'>10</span>)</div><div class='img'><img src='plot_tox_endpoints-5.png' alt='' width='700' height='433' /></div><div class='input'><span class='no'>single_site</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span>(<span class='no'>chemical_summary</span>, <span class='no'>site</span> <span class='kw'>==</span> <span class='st'>"USGS-04024000"</span>)
-<span class='fu'>plot_tox_endpoints</span>(<span class='no'>single_site</span>, <span class='kw'>category</span> <span class='kw'>=</span> <span class='st'>"Chemical"</span>, <span class='kw'>top_num</span> <span class='kw'>=</span> <span class='fl'>10</span>)</div><div class='img'><img src='plot_tox_endpoints-6.png' alt='' width='700' height='433' /></div></pre>
+<span class='fu'><a href='https://rdrr.io/pkg/toxEval/man/plot_tox_endpoints.html'>plot_tox_endpoints</a></span>(<span class='kw'>chemical_summary</span>, 
+                   filterBy = <span class='st'>"Cell Cycle"</span>,
+                   top_num = <span class='fl'>10</span>)</div><div class='img'><img src='plot_tox_endpoints-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/toxEval/man/plot_tox_endpoints.html'>plot_tox_endpoints</a></span>(<span class='kw'>chemical_summary</span>, 
+                   filterBy = <span class='st'>"Cell Cycle"</span>,
+                   top_num = <span class='fl'>10</span>, 
+                   x_label = <span class='st'>"EAR"</span>)</div><div class='img'><img src='plot_tox_endpoints-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/toxEval/man/plot_tox_endpoints.html'>plot_tox_endpoints</a></span>(<span class='kw'>chemical_summary</span>,
+                   category = <span class='st'>"Chemical Class"</span>, filterBy = <span class='st'>"PAHs"</span>,
+                   top_num = <span class='fl'>10</span>, hit_threshold = <span class='fl'>0.001</span>)</div><div class='img'><img src='plot_tox_endpoints-3.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/toxEval/man/plot_tox_endpoints.html'>plot_tox_endpoints</a></span>(<span class='kw'>chemical_summary</span>, category = <span class='st'>"Chemical"</span>, filterBy = <span class='st'>"Atrazine"</span>)</div><div class='img'><img src='plot_tox_endpoints-4.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/toxEval/man/plot_tox_endpoints.html'>plot_tox_endpoints</a></span>(<span class='kw'>chemical_summary</span>, category = <span class='st'>"Chemical"</span>, top_num = <span class='fl'>10</span>)</div><div class='img'><img src='plot_tox_endpoints-5.png' alt='' width='700' height='433' /></div><div class='input'><span class='kw'>single_site</span> <span class='op'>&lt;-</span> <span class='kw'>dplyr</span>::<span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span>(<span class='kw'>chemical_summary</span>, <span class='kw'>site</span> <span class='op'>==</span> <span class='st'>"USGS-04024000"</span>)
+<span class='fu'><a href='https://rdrr.io/pkg/toxEval/man/plot_tox_endpoints.html'>plot_tox_endpoints</a></span>(<span class='kw'>single_site</span>, category = <span class='st'>"Chemical"</span>, top_num = <span class='fl'>10</span>)</div><div class='img'><img src='plot_tox_endpoints-6.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

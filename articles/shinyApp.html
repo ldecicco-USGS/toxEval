@@ -109,7 +109,7 @@
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Shiny App</h1>
             
-            <h4 class="date">24 May, 2020</h4>
+            <h4 class="date">16 June, 2020</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/USGS-R/toxEval/blob/master/vignettes/shinyApp.Rmd"><code>vignettes/shinyApp.Rmd</code></a></small>
       <div class="hidden name"><code>shinyApp.Rmd</code></div>
@@ -125,8 +125,10 @@
 <p>The interaction with the app is primarily “point and click”. The app includes multiple ways to visualize data through boxplots, barcharts, tables and an overview map. Numerous options can be selected to customize presentation of data by choosing to focus on chemicals, chemical classes, biologically relevant endpoing groupings, and specific suites of ToxCast assays. All resulting graphics, tables, and data can be downloaded for use outside of the app.</p>
 <p>While the app is useful and quite flexible as is, it also serves as a good starting point for a more in-depth user- and study-specific analysis. All of the output on the Shiny app can be created directly in R as well. For flexibility beyond what the app offers, the R-code to produce each graph and table is displayed in the app. The user may copy this code into a script and customize it for specific study needs. The help file for each function provides instructions and example workflows (R code) for their use.</p>
 <p>To run the app, load the <code>toxEval</code> package, and run the <code>explore_endpoints</code> function:</p>
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">toxEval</span>)
-<span class="fu"><a href="../reference/explore_endpoints.html">explore_endpoints</a></span>()</pre></body></html></div>
+<div class="sourceCode" id="cb1"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw">toxEval</span>)
+<span class="fu"><a href="../reference/explore_endpoints.html">explore_endpoints</a></span>()
+</pre></div>
 <p>The computer’s default browser will open up and display the following page:</p>
 <p><img src="main.png" width="324"></p>
 <p>The app can be divided into 3 main sections:</p>
@@ -271,7 +273,9 @@
 <div id="citing-toxeval" class="section level2">
 <h2 class="hasAnchor">
 <a href="#citing-toxeval" class="anchor"></a>Citing toxEval</h2>
-<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/citation.html">citation</a></span>(<span class="kw">package</span> <span class="kw">=</span> <span class="st">"toxEval"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb2"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/utils/citation.html">citation</a></span>(package = <span class="st">"toxEval"</span>)
+</pre></div>
 <pre><code>## 
 ## To cite toxEval in publications, please use:
 ## 
