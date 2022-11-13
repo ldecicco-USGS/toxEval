@@ -10,7 +10,10 @@
 #' to units of \eqn{\mu}g/L, and reformat the data as input to toxEval.
 #'
 #' @param CAS Vector of CAS.
-#' @import dplyr
+#' @param benchmarks data frame with columns "CAS", "flags", "endPoint", "ACC".
+#' The default is the included ToxCast_ACC data frame. 
+#' @param chemicals data frame with columns "Substance_CASRN" and "Structure_MolWt".
+#' Defaults to the included tox_chemicals data frame.
 #'
 #' @return data frame with columns CAS, chnm, flags, endPoint, ACC, MlWt, and ACC_value
 #' @export
@@ -18,30 +21,29 @@
 #' CAS <- c("121-00-6", "136-85-6", "80-05-7", "84-65-1", "5436-43-1", "126-73-8")
 #' ACC <- get_ACC(CAS)
 #' head(ACC)
-get_ACC <- function(CAS) {
-
-  # Getting rid of NSE warnings:
-  Structure_MolWt <- Substance_CASRN <- casn <- Substance_Name <- ".dplyr"
-  chnm <- flags <- MlWt <- ACC_value <- casrn <- endPoint <- ".dplyr"
+get_ACC <- function(CAS,
+                    benchmarks = ToxCast_ACC,
+                    chemicals = tox_chemicals) {
 
   chem_list <- dplyr::select(tox_chemicals,
     casrn = Substance_CASRN,
     MlWt = Structure_MolWt
   )
+  
   chem_list <- dplyr::filter(chem_list, casrn %in% CAS)
 
-  ACC <- ToxCast_ACC
+  ACC <- benchmarks
   ACC <- dplyr::filter(ACC, CAS %in% CAS)
   ACC <- dplyr::right_join(ACC, chem_list,
     by = c("CAS" = "casrn")
   )
 
-  ACC <- mutate(ACC,
+  ACC <- dplyr::mutate(ACC,
     ACC_value = 10^ACC,
     ACC_value = ACC_value * MlWt
   )
-  ACC <- filter(ACC, !is.na(ACC_value))
-  ACC <- left_join(ACC, select(tox_chemicals,
+  ACC <- dplyr::filter(ACC, !is.na(ACC_value))
+  ACC <- dplyr::left_join(ACC, dplyr::select(tox_chemicals,
     CAS = Substance_CASRN,
     chnm = Substance_Name
   ), by = "CAS")

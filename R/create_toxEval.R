@@ -219,22 +219,22 @@ rm_em_dash <- function(df) {
 #' and returns a vector of which chemicals do not have ToxCast information.
 #'
 #' @param object toxEval object with "chem_info" data frame included.
+#' @param benchmarks data frame with columns "CAS", "flags", "endPoint", "ACC".
+#' The default is the included ToxCast_ACC data frame. 
 #' @param \dots additional parameters
 #'
 #' @export
-#' @importFrom magrittr "%>%"
 #' @examples
 #' path_to_tox <- system.file("extdata", package = "toxEval")
 #' file_name <- "OWC_data_fromSup.xlsx"
 #' excel_file_path <- file.path(path_to_tox, file_name)
 #' tox_list <- create_toxEval(excel_file_path)
 #' summary(tox_list)
-summary.toxEval <- function(object, ...) {
-  CAS <- endPoint <- chnm <- flags <- ".dplyr"
+summary.toxEval <- function(object, benchmarks = ToxCast_ACC, ...) {
 
   if (is.null(object[["benchmarks"]])) {
-    ACC <- ToxCast_ACC %>%
-      filter(CAS %in% unique(object$chem_info$CAS))
+    ACC <- benchmarks %>%
+      dplyr::filter(CAS %in% unique(object$chem_info$CAS))
     bench_word <- "ToxCast"
   } else {
     ACC <- object[["benchmarks"]]
@@ -242,9 +242,9 @@ summary.toxEval <- function(object, ...) {
   }
 
   CAS_w_data <- ACC %>%
-    select(CAS) %>%
-    distinct() %>%
-    pull(CAS)
+    dplyr::select(CAS) %>%
+    dplyr::distinct() %>%
+    dplyr::pull(CAS)
 
   message(length(CAS_w_data), " chemicals have ", bench_word, " information")
   message("Chemicals returned from this function do NOT have ", bench_word, " information:")

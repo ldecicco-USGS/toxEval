@@ -42,12 +42,9 @@ Imports:
     ggplot2 (>= 3.0.0),
     magrittr,
     shiny,
-    shinydashboard,
     RColorBrewer,
     readxl,
-    tools,
-    shinyAce,
-    shinycssloaders
+    tools
 Suggests:
     rmarkdown,
     testthat,
@@ -55,7 +52,10 @@ Suggests:
     here,
     tcpl,
     openxlsx,
-    covr
+    covr,
+    shinyAce,
+    shinycssloaders,
+    shinydashboard
 BugReports: https://code.usgs.gov/water/toxEval/-/issues
 VignetteBuilder: knitr
 BuildVignettes: true

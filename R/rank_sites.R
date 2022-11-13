@@ -23,7 +23,6 @@
 #' hits based on the category.
 #'
 #' @rdname rank_sites_DT
-#' @importFrom stats median
 #' @examples
 #' # This is the example workflow:
 #' path_to_tox <- system.file("extdata", package = "toxEval")
@@ -51,7 +50,6 @@ rank_sites_DT <- function(chemical_summary,
                           mean_logic = FALSE,
                           sum_logic = TRUE,
                           hit_threshold = 0.1) {
-  Bio_category <- Class <- EAR <- maxEAR <- sumEAR <- value <- calc <- chnm <- choice_calc <- n <- nHits <- site <- ".dplyr"
 
   match.arg(category, c("Biological", "Chemical Class", "Chemical"))
 
@@ -75,7 +73,7 @@ rank_sites_DT <- function(chemical_summary,
   n <- length(maxEARS)
   ignoreIndex <- which(names(statsOfColumn) %in% c("site", "category"))
 
-  if (n > 20 & n < 30) {
+  if (n > 20 && n < 30) {
     colors <- c(
       RColorBrewer::brewer.pal(n = 12, name = "Set3"),
       RColorBrewer::brewer.pal(n = 8, name = "Set2"),
@@ -87,7 +85,7 @@ rank_sites_DT <- function(chemical_summary,
       RColorBrewer::brewer.pal(n = max(c(3, n - 12)), name = "Set2")
     )
   } else {
-    colors <- colorRampPalette(RColorBrewer::brewer.pal(11, "Spectral"))(n)
+    colors <- grDevices::colorRampPalette(RColorBrewer::brewer.pal(11, "Spectral"))(n)
   }
 
   tableSumm <- DT::datatable(statsOfColumn,
@@ -105,7 +103,7 @@ rank_sites_DT <- function(chemical_summary,
 
   tableSumm <- DT::formatSignif(tableSumm, names(statsOfColumn)[-ignoreIndex], 2)
 
-  for (i in 1:length(maxEARS)) {
+  for (i in seq_along(maxEARS)) {
     tableSumm <- DT::formatStyle(tableSumm,
       names(statsOfColumn)[maxEARS[i]],
       backgroundColor = colors[i]
@@ -140,17 +138,15 @@ rank_sites <- function(chemical_summary,
                        hit_threshold = 0.1,
                        mean_logic = FALSE,
                        sum_logic = TRUE) {
-  sumEAR <- nHits <- n <- calc <- value <- choice_calc <- name <- ".dplyr"
-  chnm <- Class <- Bio_category <- site <- EAR <- maxEAR <- ".dplyr"
 
   siteToFind <- unique(chemical_summary$shortName)
 
   if (category == "Chemical") {
-    chemical_summary <- mutate(chemical_summary, category = chnm)
+    chemical_summary <- dplyr::mutate(chemical_summary, category = chnm)
   } else if (category == "Chemical Class") {
-    chemical_summary <- mutate(chemical_summary, category = Class)
+    chemical_summary <- dplyr::mutate(chemical_summary, category = Class)
   } else {
-    chemical_summary <- mutate(chemical_summary, category = Bio_category)
+    chemical_summary <- dplyr::mutate(chemical_summary, category = Bio_category)
   }
 
   chemical_summary <- dplyr::select(chemical_summary, -Class, -Bio_category, -chnm)
@@ -163,28 +159,28 @@ rank_sites <- function(chemical_summary,
 
   if (!sum_logic) {
     statsOfColumn <- chemical_summary %>%
-      group_by(site, date, category) %>%
-      summarize(
+      dplyr::group_by(site, date, category) %>%
+      dplyr::summarize(
         sumEAR = max(EAR),
         nHits = sum(sumEAR > hit_threshold)
       ) %>%
-      group_by(site, category) %>%
-      summarise(
+      dplyr::group_by(site, category) %>%
+      dplyr::summarise(
         maxEAR = ifelse(mean_logic, mean(sumEAR), max(sumEAR)),
-        freq = sum(nHits > 0) / n()
+        freq = sum(nHits > 0) / dplyr::n()
       ) %>%
       data.frame()
   } else {
     statsOfColumn <- chemical_summary %>%
-      group_by(site, date, category) %>%
-      summarise(
+      dplyr::group_by(site, date, category) %>%
+      dplyr::summarise(
         sumEAR = sum(EAR),
         nHits = sum(sumEAR > hit_threshold)
       ) %>%
-      group_by(site, category) %>%
-      summarise(
+      dplyr::group_by(site, category) %>%
+      dplyr::summarise(
         maxEAR = ifelse(mean_logic, mean(sumEAR), max(sumEAR)),
-        freq = sum(nHits > 0) / n()
+        freq = sum(nHits > 0) / dplyr::n()
       ) %>%
       data.frame()
   }
@@ -223,7 +219,6 @@ rank_sites <- function(chemical_summary,
   if (length(maxEARS) != 1) {
     statsOfColumn <- statsOfColumn[, MaxEARSordered]
   }
-
 
   if (isTRUE(mean_logic)) {
     names(statsOfColumn)[maxEARS] <- gsub("max", "mean", names(statsOfColumn)[maxEARS])

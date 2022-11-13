@@ -4,10 +4,16 @@
 \alias{get_ACC}
 \title{Get the ACC values for a selection of chemicals}
 \usage{
-get_ACC(CAS)
+get_ACC(CAS, benchmarks = ToxCast_ACC, chemicals = tox_chemicals)
 }
 \arguments{
 \item{CAS}{Vector of CAS.}
+
+\item{benchmarks}{data frame with columns "CAS", "flags", "endPoint", "ACC".
+The default is the included ToxCast_ACC data frame.}
+
+\item{chemicals}{data frame with columns "Substance_CASRN" and "Structure_MolWt".
+Defaults to the included tox_chemicals data frame.}
 }
 \value{
 data frame with columns CAS, chnm, flags, endPoint, ACC, MlWt, and ACC_value

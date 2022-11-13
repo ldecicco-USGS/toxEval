@@ -42,14 +42,12 @@ filter_groups <- function(ep,
                             "UTOR", "VALA"
                           ),
                           remove_groups = c("Background Measurement", "Undefined")) {
+  
   possible_assays <- unique(end_point_info$assay_source_name)
   match.arg(assays, possible_assays, several.ok = TRUE)
 
-  # Getting rid of NSE warnings:
-  assay_source_name <- assay_component_endpoint_name <- ".dplyr"
-
   ep <- ep[, c("assay_component_endpoint_name", groupCol, "assay_source_name")] %>%
-    rename(
+    dplyr::rename(
       endPoint = assay_component_endpoint_name,
       assaysFull = assay_source_name
     )

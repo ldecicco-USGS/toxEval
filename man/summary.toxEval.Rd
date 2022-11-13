@@ -4,10 +4,13 @@
 \alias{summary.toxEval}
 \title{Summary of tox_list}
 \usage{
-\method{summary}{toxEval}(object, ...)
+\method{summary}{toxEval}(object, benchmarks = ToxCast_ACC, ...)
 }
 \arguments{
 \item{object}{toxEval object with "chem_info" data frame included.}
+
+\item{benchmarks}{data frame with columns "CAS", "flags", "endPoint", "ACC".
+The default is the included ToxCast_ACC data frame.}
 
 \item{\dots}{additional parameters}
 }

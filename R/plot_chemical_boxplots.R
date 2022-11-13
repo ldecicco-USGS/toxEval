@@ -12,10 +12,6 @@ plot_chemical_boxplots <- function(chemical_summary, ...,
                                    x_label = NA,
                                    palette = NA,
                                    hit_threshold = NA) {
-  site <- EAR <- sumEAR <- meanEAR <- groupCol <- nonZero <- ".dplyr"
-  chnm <- Class <- meanEAR <- x <- y <- max_med <- endPoint <- ".dplyr"
-  ymin <- ymax <- logEAR <- hits <- hit_label <- ".dplyr"
-
   cbValues <- c(
     "#E41A1C", "#377EB8", "#4DAF4A", "#984EA3", "#FF7F00", "#FFFF33", "#A65628",
     "#DCDA4B", "#999999", "#00FFFF", "#CEA226", "#CC79A7", "#4E26CE",
@@ -38,7 +34,7 @@ plot_chemical_boxplots <- function(chemical_summary, ...,
   if (length(unique(chemical_summary$Class)) > length(cbValues)) {
     n <- length(unique(chemical_summary$Class))
 
-    if (n > 20 & n < 30) {
+    if (n > 20 && n < 30) {
       cbValues <- c(
         RColorBrewer::brewer.pal(n = 12, name = "Set3"),
         RColorBrewer::brewer.pal(n = 8, name = "Set2"),
@@ -67,7 +63,7 @@ plot_chemical_boxplots <- function(chemical_summary, ...,
     if ("meanEAR" %in% names(chemical_summary)) {
       message("meanEAR values should not be used in a single site boxplot")
       chemical_summary <- chemical_summary %>%
-        rename(EAR = meanEAR)
+        dplyr::rename(EAR = meanEAR)
 
       if (!("date" %in% names(chemical_summary))) {
         chemical_summary$date <- 1
@@ -76,51 +72,51 @@ plot_chemical_boxplots <- function(chemical_summary, ...,
 
     # Single site order:
     orderColsBy <- chemical_summary %>%
-      mutate(logEAR = log(EAR)) %>%
-      group_by(chnm, Class, ...) %>%
-      summarise(median = median(logEAR[!is.na(logEAR)], na.rm = TRUE)) %>%
-      arrange(median) %>%
-      ungroup()
+      dplyr::mutate(logEAR = log(EAR)) %>%
+      dplyr::group_by(chnm, Class, ...) %>%
+      dplyr::summarise(median = stats::median(logEAR[!is.na(logEAR)], na.rm = TRUE)) %>%
+      dplyr::arrange(median) %>%
+      dplyr::ungroup()
 
     class_order <- orderColsBy %>%
-      group_by(Class, ...) %>%
-      summarise(max_med = max(median, na.rm = TRUE)) %>%
-      ungroup() %>%
-      arrange(max_med) %>%
-      mutate(Class = as.character(Class)) %>%
-      select(Class) %>%
-      distinct() %>%
-      pull(Class)
+      dplyr::group_by(Class, ...) %>%
+      dplyr::summarise(max_med = max(median, na.rm = TRUE)) %>%
+      dplyr::ungroup() %>%
+      dplyr::arrange(max_med) %>%
+      dplyr::mutate(Class = as.character(Class)) %>%
+      dplyr::select(Class) %>%
+      dplyr::distinct() %>%
+      dplyr::pull(Class)
 
     orderedLevels <- chemical_summary %>%
-      mutate(logEAR = log(EAR)) %>%
-      group_by(chnm, Class, ...) %>%
-      summarise(median = median(logEAR[!is.na(logEAR)])) %>%
-      ungroup() %>%
-      mutate(
+      dplyr::mutate(logEAR = log(EAR)) %>%
+      dplyr::group_by(chnm, Class, ...) %>%
+      dplyr::summarise(median = stats::median(logEAR[!is.na(logEAR)])) %>%
+      dplyr::ungroup() %>%
+      dplyr::mutate(
         Class = factor(Class, levels = rev(class_order)),
         chnm = as.character(chnm)
       ) %>%
-      arrange(Class, desc(median)) %>%
-      select(chnm) %>%
-      distinct() %>%
-      pull(chnm)
+      dplyr::arrange(Class, dplyr::desc(median)) %>%
+      dplyr::select(chnm) %>%
+      dplyr::distinct() %>%
+      dplyr::pull(chnm)
 
     chemical_summary$Class <- factor(as.character(chemical_summary$Class), levels = rev(class_order))
     chemical_summary$chnm <- factor(as.character(chemical_summary$chnm), levels = rev(orderedLevels))
 
     countNonZero <- chemical_summary %>%
-      group_by(...) %>%
-      mutate(
+      dplyr::group_by(...) %>%
+      dplyr::mutate(
         ymin = min(EAR[!is.na(EAR)], na.rm = TRUE),
         ymax = max(EAR[!is.na(EAR)], na.rm = TRUE)
       ) %>%
-      group_by(chnm, Class, ymin, ymax, ...) %>%
-      summarize(
+      dplyr::group_by(chnm, Class, ymin, ymax, ...) %>%
+      dplyr::summarize(
         nonZero = as.character(length(unique(endPoint[!is.na(EAR)]))),
         hits = as.character(sum(EAR[!is.na(EAR)] > hit_threshold))
       ) %>%
-      ungroup()
+      dplyr::ungroup()
 
     countNonZero$hits[countNonZero$hits == "0"] <- ""
 
@@ -161,17 +157,17 @@ plot_chemical_boxplots <- function(chemical_summary, ...,
     pretty_logs_new <- prettyLogs(graph_data$meanEAR[!is.na(graph_data$meanEAR)])
 
     countNonZero <- graph_data %>%
-      group_by(...) %>%
-      mutate(
+      dplyr::group_by(...) %>%
+      dplyr::mutate(
         ymin = min(meanEAR[!is.na(meanEAR)], na.rm = TRUE),
         ymax = max(meanEAR[!is.na(meanEAR)], na.rm = TRUE)
       ) %>%
-      group_by(chnm, Class, ymin, ymax, ...) %>%
-      summarize(
+      dplyr::group_by(chnm, Class, ymin, ymax, ...) %>%
+      dplyr::summarize(
         nonZero = as.character(sum(!is.na(meanEAR))),
         hits = as.character(sum(meanEAR[!is.na(meanEAR)] > hit_threshold))
       ) %>%
-      ungroup()
+      dplyr::ungroup()
 
     countNonZero$hits[countNonZero$hits == "0"] <- ""
 
@@ -253,9 +249,9 @@ plot_chemical_boxplots <- function(chemical_summary, ...,
     coord_flip(clip = "off")
 
   labels_df <- countNonZero %>%
-    select(-chnm, -Class, -nonZero, -hits) %>%
-    distinct() %>%
-    mutate(
+    dplyr::select(-chnm, -Class, -nonZero, -hits) %>%
+    dplyr::distinct() %>%
+    dplyr::mutate(
       x = Inf,
       label = label,
       hit_label = "# Hits"
@@ -325,26 +321,25 @@ graph_chem_data <- function(chemical_summary, ...,
                             manual_remove = NULL,
                             mean_logic = FALSE,
                             sum_logic = TRUE) {
-  site <- chnm <- Class <- EAR <- sumEAR <- meanEAR <- ".dplyr"
 
   if (!sum_logic) {
     graphData <- chemical_summary %>%
-      group_by(site, chnm, Class, ...) %>%
-      summarise(meanEAR = ifelse(mean_logic, mean(EAR, na.rm = TRUE), max(EAR, na.rm = TRUE))) %>%
-      ungroup()
+      dplyr::group_by(site, chnm, Class, ...) %>%
+      dplyr::summarise(meanEAR = ifelse(mean_logic, mean(EAR, na.rm = TRUE), max(EAR, na.rm = TRUE))) %>%
+      dplyr::ungroup()
   } else {
     graphData <- chemical_summary %>%
-      group_by(site, date, chnm, ...) %>%
-      summarise(sumEAR = sum(EAR, na.rm = TRUE)) %>%
-      ungroup() %>%
-      group_by(site, chnm, ...) %>%
-      summarise(meanEAR = ifelse(mean_logic, mean(sumEAR, na.rm = TRUE), max(sumEAR, na.rm = TRUE))) %>%
-      ungroup() %>%
-      left_join(distinct(select(chemical_summary, chnm, Class)), by = "chnm")
+      dplyr::group_by(site, date, chnm, ...) %>%
+      dplyr::summarise(sumEAR = sum(EAR, na.rm = TRUE)) %>%
+      dplyr::ungroup() %>%
+      dplyr::group_by(site, chnm, ...) %>%
+      dplyr::summarise(meanEAR = ifelse(mean_logic, mean(sumEAR, na.rm = TRUE), max(sumEAR, na.rm = TRUE))) %>%
+      dplyr::ungroup() %>%
+      dplyr::left_join(dplyr::distinct(dplyr::select(chemical_summary, chnm, Class)), by = "chnm")
   }
 
   if (!is.null(manual_remove)) {
-    graphData <- filter(graphData, !(chnm %in% manual_remove))
+    graphData <- dplyr::filter(graphData, !(chnm %in% manual_remove))
   }
 
   return(graphData)
